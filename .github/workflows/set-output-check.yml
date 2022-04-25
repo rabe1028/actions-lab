@@ -23,12 +23,12 @@ jobs:
         run: echo ${{ steps.out2.outputs.out }}
 
       - name: csv check
-        uses: ./github/actions/echo
+        uses: ./.github/actions/echo
         with:
           args: test1, test2
 
       - name: list check
-        uses: ./github/actions/echo
+        uses: ./.github/actions/echo
         with:
           args: |
             test1
