@@ -49,7 +49,7 @@ jobs:
           repository: rabe1028/actions-lab
           token: ${{ secrets.GITHUB_TOKEN }}
           event-type: repo-dispatch
-          client-pyaload: ''
+          client-payload: ''
 
       # 改行込みで埋め込まれるため、ここだとecho test1の次に、test2というscriptを呼び出そうとして落ちる
       # - name: list check
