@@ -1,0 +1,22 @@
+name: repository dispatch test
+
+on:
+  repository_dispatch:
+    types: [ repo-dispatch ]
+  workflow_dispatch:
+    inputs:
+      default-test:
+        description: non requirements args
+        required: false
+        default: "test-value"
+        type: string
+
+
+jobs:
+  repo-dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo 
+        shell: bash
+        run: |
+          echo ${{ github.event.client_payload.default-test }}
