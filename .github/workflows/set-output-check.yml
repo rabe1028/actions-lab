@@ -33,3 +33,11 @@ jobs:
           args: |
             test1
             test2
+
+      - name: if check
+        run: |
+          if [ ${{ true }} -eq true ]; then
+            echo success
+          else
+            echo failed
+          fi
