@@ -30,6 +30,14 @@ jobs:
             echo failed
           fi
 
+      - name: if check2
+        run: |
+          if [ ${{ true }} ]; then
+            echo success
+          else
+            echo failed
+          fi
+
       - name: csv check
         uses: ./.github/actions/echo
         with:
