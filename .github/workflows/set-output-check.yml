@@ -1,0 +1,35 @@
+name: set output check
+
+on: workflow_dispatch
+
+jobs:
+  output-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: output1
+        id: out1
+        run: echo ::set-output name=out::test1,test2
+
+      - name: echo1
+        run: echo ${{ steps.out1.outputs.out }}
+
+      - name: output2
+        id: out2
+        run: echo ::set-output name=out::["test1", "test2"]
+
+      - name: echo1
+        run: echo ${{ steps.out2.outputs.out }}
+
+      - name: csv check
+        uses: ./github/actions/echo
+        with:
+          args: test1, test2
+
+      - name: list check
+        uses: ./github/actions/echo
+        with:
+          args: |
+            test1
+            test2

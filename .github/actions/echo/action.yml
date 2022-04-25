@@ -1,0 +1,17 @@
+name: Show input
+
+description: show input
+
+inputs:
+  args:
+    description: arg
+    required: true
+
+
+runs:
+  using: composite
+  steps:
+    - name: echo
+      shell: bash
+      run: |
+        echo ${{ inputs.args }}
