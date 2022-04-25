@@ -43,9 +43,10 @@ jobs:
         with:
           args: test1, test2
 
-      - name: list check
-        uses: ./.github/actions/echo
-        with:
-          args: |
-            test1
-            test2
+      # 改行込みで埋め込まれるため、ここだとecho test1の次に、test2というscriptを呼び出そうとして落ちる
+      # - name: list check
+      #   uses: ./.github/actions/echo
+      #   with:
+      #     args: |
+      #       test1
+      #       test2

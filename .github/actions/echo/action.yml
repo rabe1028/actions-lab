@@ -6,6 +6,11 @@ inputs:
   args:
     description: arg
     required: true
+  default-check:
+    description: default check
+    required: false
+    type: string
+    default: test-default
 
 
 runs:
@@ -15,3 +20,8 @@ runs:
       shell: bash
       run: |
         echo ${{ inputs.args }}
+
+    - name: echo default
+      shell: bash
+      run: |
+        echo ${{ inputs.default-check }}
