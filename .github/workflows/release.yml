@@ -65,15 +65,16 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require('fs').promises;
+            const asset = await fs.readFile("./actions-lab.zip");
             await github.rest.repos.uploadReleaseAsset({
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: ${{ steps.release.outputs.result }},
               name: "ubuntu-latest",
-              data: await fs.readFile("./actions-lab.zip"),
+              data: asset,
               headers: {
                 "content-type": "application/zip",
-                "content-length": fs.statSync("./actions-lab.zip").size
+                "content-length": asset.length
               }
             });
 
