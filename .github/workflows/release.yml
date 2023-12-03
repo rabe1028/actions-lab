@@ -41,6 +41,10 @@ jobs:
         shell: bash
         run: cargo build --release
 
+      - name: create zip
+        shell: bash
+        run: zip -j actions-lab.zip target/release/actions-lab
+
       - name: Create Release
         uses: actions/github-script@v5
         id: release
@@ -66,11 +70,12 @@ jobs:
               repo: context.repo.repo,
               release_id: ${{ steps.release.outputs.result }},
               name: "ubuntu-latest",
-              data: await fs.readFile("./target/release/actions-lab"),
+              data: await fs.readFileSync("./actions-lab.zip"),
             });
 
   bump-version:
     name: Bump Version
+    needs: release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
