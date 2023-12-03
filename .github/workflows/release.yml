@@ -45,31 +45,27 @@ jobs:
         shell: bash
         run: zip -j actions-lab.zip target/release/actions-lab
 
-      - name: Create Release
+      - name: Create Release and Upload Asset
         uses: actions/github-script@v5
         id: release
         with:
           script: |
+            const fs = require('fs').promises;
+            const asset = await fs.readFile("./actions-lab.zip");
+
             const release = await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
               tag_name: "v${{ steps.set_crate_version.outputs.version }}",
               generate_release_notes: true
             });
-            return release.id;
-          result-encoding: string
 
-      - name: Upload a release asset
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const fs = require('fs').promises;
-            const asset = await fs.readFile("./actions-lab.zip");
+            console.debug(release);
+
             await github.rest.repos.uploadReleaseAsset({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              release_id: ${{ steps.release.outputs.result }},
+              release_id: release.data.id,
               name: "ubuntu-latest.zip",
               data: asset,
               headers: {
