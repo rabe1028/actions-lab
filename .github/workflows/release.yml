@@ -70,7 +70,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: ${{ steps.release.outputs.result }},
-              name: "ubuntu-latest",
+              name: "ubuntu-latest.zip",
               data: asset,
               headers: {
                 "content-type": "application/zip",
