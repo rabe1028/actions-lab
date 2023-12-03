@@ -70,7 +70,7 @@ jobs:
               repo: context.repo.repo,
               release_id: ${{ steps.release.outputs.result }},
               name: "ubuntu-latest",
-              data: await fs.readFileSync("./actions-lab.zip"),
+              data: await fs.readFile("./actions-lab.zip"),
               headers: {
                 "content-type": "application/zip",
                 "content-length": fs.statSync("./actions-lab.zip").size
