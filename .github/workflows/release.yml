@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: debug
-        run: echo ${{ toJSON(github) }}
+        run: echo "${{ toJSON(github) }}"
 
       - name: Checkout code
         uses: actions/checkout@v4
